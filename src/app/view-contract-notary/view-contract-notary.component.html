@@ -1,0 +1,97 @@
+<div class="container">
+
+
+    <!-- Form -->
+    <div class="container-fluid">
+        <form name="form">
+            <h1>Viewing contract with id: {{ contractId }}</h1>
+
+            <div class="container" style="padding-bottom: 1%">
+                <!-- dateCreated -->
+                <div class="form-group overflow-auto">
+                    <label for="dateCreated">Date Created</label>
+                    <input type="text" name="dateCreated" [(ngModel)]="contract.dateCreated" #dateCreated="ngModel"
+                        class="form-control" readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- dateApproved -->
+                <div class="form-group">
+                    <label for="dateApproved">Date Approved</label>
+                    <input type="text" name="dateApproved" [(ngModel)]="contract.dateApproved" #dateApproved="ngModel"
+                        class="form-control" readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- status -->
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" name="status" [(ngModel)]="contract.status" #status="ngModel"
+                        class="form-control" readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- member1 -->
+                <div class="form-group">
+                    <label>Member 1</label>
+                    <input class="form-control" type="text" name="member1" [(ngModel)]="this.member1" readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- member2 -->
+                <div class="form-group">
+                    <label>Member 2</label>
+                    <input class="form-control" type="text" name="member2" [(ngModel)]="this.member2" readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- member3 -->
+                <div class="form-group">
+                    <label>Member 3</label>
+                    <input class="form-control" type="text" name="member3" [(ngModel)]="this.member3" readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- member4 -->
+                <div class="form-group">
+                    <label>Member 4</label>
+                    <input class="form-control" type="text" name="member4" [(ngModel)]="this.member4" readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- member1 -->
+                <div class="form-group">
+                    <label>Text</label>
+                    <textarea class="form-control" type="text" name="text" [(ngModel)]="contract.text"
+                        readonly></textarea>
+                    <span></span>
+
+                </div>
+            </div>
+
+            <div class="container button">
+                <!-- Approve button -->
+                <button type="button" class="btn btn-primary btn-lg btn-block"
+                (click)="approveContract(contractId!)" 
+                *ngIf="isNotary && contract.status.includes('Answered')">Approve</button>
+                <div *ngIf="contract.status.includes('In Progress')">All members need to answer before you can approve the contract</div>
+                <div *ngIf="contract.dateApproved">You have approved this contract</div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+
+</div>

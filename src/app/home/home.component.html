@@ -1,0 +1,102 @@
+<div class="container">
+
+  <div class="container container-fluid">
+    <div class="button-wrapper">
+      <!-- User List -->
+      <button *ngIf="isAdmin" class="btn btn-primary btn-lg btn-block" (click)="getAllUsers()">User List</button>
+
+      <!-- Contract List -->
+      <button *ngIf="isAdmin || isNotary" class="btn btn-primary btn-lg btn-block" (click)="getAllContracts()">Contract
+        List</button>
+
+      <!-- Create Contract -->
+      <button *ngIf="isLawyer" class="btn btn-primary btn-lg btn-block" (click)="createContract()">Create
+        Contract</button>
+
+      <!-- View Contract -->
+      <button *ngIf="isLawyer || isClient" class="btn btn-primary btn-lg btn-block" (click)="getMyContract()">View
+        Contract</button>
+
+      <!-- Create User -->
+      <button *ngIf="isAdmin" class="btn btn-primary btn-lg btn-block" (click)="createUser()">Create User</button>
+
+      <!-- View Profile -->
+      <button class="btn btn-primary btn-lg btn-block" (click)="viewLoggedInProfile()">View Profile</button>
+    </div>
+  </div>
+  
+  <app-identification *ngIf="isLoggedIn"></app-identification>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table class="table table-dark table-striped table-bordered table-hover"> -->
+<!-- <thead class="thead-dark"> -->
+<!-- <tr> -->
+<!-- <th>ID</th> -->
+<!-- <th>Username</th> -->
+<!-- <th>Email</th> -->
+<!-- <th>First Name</th> -->
+<!-- <th>Last Name</th> -->
+<!-- <th>AFM</th> -->
+<!-- <th>AMKA</th> -->
+<!-- <th>Answer</th> -->
+<!-- <th>Roles</th> -->
+<!-- <th>Contract</th> -->
+<!-- <th>Actions</th> -->
+<!-- </tr> -->
+<!-- </thead> -->
+
+<!-- <tbody class="tablebodyyo"> -->
+<!-- <tr *ngFor="let tempUser of appUerList"> -->
+<!-- <td>{{ tempUser.id}}</td> -->
+<!-- <td>{{ tempUser.username }}</td> -->
+<!-- <td>{{ tempUser.email }}</td> -->
+<!-- <td>{{ tempUser.firstName }}</td> -->
+<!-- <td>{{ tempUser.lastName }}</td> -->
+<!-- <td>{{ tempUser.afm }}</td> -->
+<!-- <td>{{ tempUser.amka }}</td> -->
+<!-- <td>{{ tempUser.answer }}</td> -->
+<!-- <td>{{ tempUser.strRoles }}</td> -->
+<!-- <td>{{ tempUser.contract }}</td> -->
+<!-- <td><button type="button" class="btn btn-info">View</button></td>
+      </tr>
+    </tbody>
+  </table> -->
+
+
+
+<!-- <div class="identification" *ngIf="isLoggedIn">
+      {{ username }}, Logged in as: <span>[ {{ rolesToOneString }} ]</span>
+    </div> -->
+<!-- <app-identification></app-identification> -->
+<!-- </div> -->

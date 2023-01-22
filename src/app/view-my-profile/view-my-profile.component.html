@@ -1,0 +1,97 @@
+<div class="container">
+
+
+    <!-- Form -->
+    <div class="container-fluid">
+        <form name="form">
+            <h1>Your profile's information</h1>
+
+            <div class="container">
+                <!-- username -->
+                <div class="form-group overflow-auto">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" [(ngModel)]="appUser.username" placeholder="Username"
+                        #username="ngModel" class="form-control" readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" [(ngModel)]="appUser.email" #email="ngModel" class="form-control"
+                        readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- roles -->
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role1" [(ngModel)]="isRole1" type="checkbox" id="role1"
+                            value="admin" #role1="ngModel" disabled>
+                        <label class="form-check-label" for="role1">Admin</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role2" [(ngModel)]="isRole2" type="checkbox" id="role2"
+                            value="lawyer" #role2="ngModel" disabled>
+                        <label class="form-check-label" for="role2">Lawyer</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role3" [(ngModel)]="isRole3" type="checkbox" id="role3"
+                            value="notary" #role3="ngModel" disabled>
+                        <label class="form-check-label" for="role3">Notary</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role4" [(ngModel)]="isRole4" type="checkbox" id="role4"
+                            value="client" #role4="ngModel" disabled>
+                        <label class="form-check-label" for="role4">Client</label>
+                    </div>
+                </div>
+
+
+                <!-- firstName -->
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" [(ngModel)]="appUser.firstName" #firstName="ngModel"
+                        class="form-control" readonly />
+
+                    <span></span>
+
+                </div>
+
+                <!-- lastName -->
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" name="lastName" [(ngModel)]="appUser.lastName"
+                        placeholder="Biden" #lastName="ngModel" readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- afm -->
+                <div class="form-group">
+                    <label for="afm">Afm</label>
+                    <input class="form-control" type="text" name="afm" [(ngModel)]="appUser.afm" #afm="ngModel"
+                        readonly />
+                    <span></span>
+
+                </div>
+
+                <!-- amka -->
+                <div class="form-group">
+                    <label for="amka">Amka</label>
+                    <input class="form-control" type="text" name="amka" [(ngModel)]="appUser.amka" #amka="ngModel"
+                        readonly />
+                    <span></span>
+
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+</div>

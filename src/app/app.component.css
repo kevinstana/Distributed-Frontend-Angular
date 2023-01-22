@@ -1,0 +1,58 @@
+.navbar {
+    background-color: #000814;
+}
+
+.home-text, .login-text, .logout-text {
+    font-size: x-large;
+}
+
+/* .mr-auto {
+    align-self: auto;
+    margin-left: 75%;
+    display: inline-block;
+    position: relative;
+
+} */
+
+.underline {
+    align-self: auto;
+    margin-right: 1%;
+    display: inline-block;
+    position: relative;
+}
+
+.underline::after,
+.mr-auto::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.underline:hover::after,
+.mr-auto:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  
+}
+
+.navbar-brand {
+    font-size: xx-large;
+}
+
+.identification {
+    position: absolute;
+    bottom: 1%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: medium;
+
+}
+

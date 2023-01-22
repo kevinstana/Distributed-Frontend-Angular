@@ -1,0 +1,9 @@
+.identification {
+    position: absolute;
+    bottom: 1%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: medium;
+
+}

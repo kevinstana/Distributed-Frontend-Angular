@@ -1,0 +1,24 @@
+h1 {
+    position: absolute;
+    padding-bottom: 18vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    padding-bottom: 10vh;
+}
+
+.container-fluid {
+    margin-top: 18vh;
+    color: white;
+}
+
+.noContracts {
+    align-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25%;
+    font-size: x-large;
+}
