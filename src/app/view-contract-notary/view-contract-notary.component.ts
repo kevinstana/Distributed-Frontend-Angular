@@ -7,7 +7,7 @@ import { StorageService } from '../_services/storage.service';
 @Component({
   selector: 'app-view-contract-notary',
   templateUrl: './view-contract-notary.component.html',
-  styleUrls: ['./view-contract-notary.component.css']
+  styleUrls: ['./view-contract-notary.component.css'],
 })
 export class ViewContractNotaryComponent {
   isLoggedIn = false;
@@ -20,56 +20,56 @@ export class ViewContractNotaryComponent {
     dateCreated: '',
     dateApproved: '',
     status: '',
-    members: []
+    members: [],
   };
 
-  member1 = '';
-  member2 = '';
-  member3 = '';
-  member4 = '';
+  member1: string[] = [];
+  member2: string[] = [];
+  member3: string[] = [];
+  member4: string[] = [];
 
   constructor(
     private storageService: StorageService,
     private contractService: ContractService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
-    ngOnInit(): void {
-      this.isLoggedIn = this.storageService.isLoggedIn();
-  
-      if (!this.isLoggedIn) {
-        this.router.navigateByUrl('/login');
+  ngOnInit(): void {
+    this.isLoggedIn = this.storageService.isLoggedIn();
+
+    if (!this.isLoggedIn) {
+      this.router.navigateByUrl('/login');
+    } else {
+      this.isNotary = this.storageService.isNotary();
+      if (!this.isNotary) {
+        this.router.navigateByUrl('/home');
       } else {
-          this.isNotary = this.storageService.isNotary();
-          if (!this.isNotary) {
-            this.router.navigateByUrl('/home');
-          } else {
-              this.contractId = this.storageService.getContractId();
-              this.contractService.viewContractNotary(this.contractId!).subscribe({
-              next: (data) => {
-                this.contract = data;
-                this.member1 = this.contract.members[0];
-                this.member2 = this.contract.members[1];
-                this.member3 = this.contract.members[2];
-                this.member4 = this.contract.members[3];
-            },
-            error: (err) => {
-              this.message = err.error.message;
-              window.alert([this.message]);
-              this.router.navigate(['/home']);
-              if (err.error) {
-                // this.content = JSON.parse(err.error).message;
-              } else {
-                this.message = 'Error with status: ' + err.status;
-              }
-            },
-          });
-        }
+        this.contractId = this.storageService.getContractId();
+        this.contractService.viewContractNotary(this.contractId!).subscribe({
+          next: (data) => {
+            this.contract = data;
+            this.member1 = this.contract.members[0].split(': ');
+            this.member2 = this.contract.members[1].split(': ');
+            this.member3 = this.contract.members[2].split(': ');
+            this.member4 = this.contract.members[3].split(': ');
+          },
+          error: (err) => {
+            this.message = err.error.message;
+            window.alert([this.message]);
+            this.router.navigate(['/home']);
+            if (err.error) {
+              // this.content = JSON.parse(err.error).message;
+            } else {
+              this.message = 'Error with status: ' + err.status;
+            }
+          },
+        });
       }
-      
     }
+  }
 
-    approveContract(contractId: number) {
-      this.contractService.approveContract(contractId).subscribe((data) => {})
-      window.location.reload();
-    }
+  approveContract(contractId: number) {
+    this.contractService.approveContractNotary(contractId).subscribe((data) => {});
+    window.location.reload();
+  }
 }

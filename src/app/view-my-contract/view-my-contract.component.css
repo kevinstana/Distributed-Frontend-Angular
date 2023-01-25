@@ -4,6 +4,10 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .form-group {
+    /* margin-top: 2%; */
+  }
   
   .container {
     padding-bottom: 10vh;

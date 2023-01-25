@@ -5,7 +5,6 @@
     <div class="container-fluid">
         <form name="form">
             <h1>My contract</h1>
-
             <div class="container" style="padding-bottom: 1%">
                 <!-- dateCreated -->
                 <div class="form-group overflow-auto">
@@ -39,32 +38,32 @@
 
                 <!-- member1 -->
                 <div class="form-group">
-                    <label>Member 1</label>
-                    <input class="form-control" type="text" name="member1" [(ngModel)]="this.member1" readonly />
+                    <label>{{ member1[0] }}</label>
+                    <input class="form-control" type="text" name="member1" [(ngModel)]="this.member1[1]" readonly />
                     <span></span>
 
                 </div>
 
                 <!-- member2 -->
                 <div class="form-group">
-                    <label>Member 2</label>
-                    <input class="form-control" type="text" name="member2" [(ngModel)]="this.member2" readonly />
+                    <label>{{ member2[0] }}</label>
+                    <input class="form-control" type="text" name="member2" [(ngModel)]="this.member2[1]" readonly />
                     <span></span>
 
                 </div>
 
                 <!-- member3 -->
                 <div class="form-group">
-                    <label>Member 3</label>
-                    <input class="form-control" type="text" name="member3" [(ngModel)]="this.member3" readonly />
+                    <label>{{ member3[0] }}</label>
+                    <input class="form-control" type="text" name="member3" [(ngModel)]="this.member3[1]" readonly />
                     <span></span>
 
                 </div>
 
                 <!-- member4 -->
                 <div class="form-group">
-                    <label>Member 4</label>
-                    <input class="form-control" type="text" name="member4" [(ngModel)]="this.member4" readonly />
+                    <label>{{ member4[0] }}</label>
+                    <input class="form-control" type="text" name="member4" [(ngModel)]="this.member4[1]" readonly />
                     <span></span>
 
                 </div>
@@ -81,10 +80,13 @@
 
             <div class="container button">
                 <!-- Answer button -->
-                <button type="button" (click)="OnSubmit()" class="btn btn-primary btn-lg btn-block">Answer</button>
+                <button type="button" *ngIf="this.myAnswer.includes('No') else elseBlock"  (click)="OnSubmit()" class="btn btn-primary btn-lg btn-block">Answer</button>
             </div>
 
-
+            <ng-template #elseBlock>
+                <div *ngIf="this.message?.length! > 0" class="alert alert-danger">{{ this.message }}</div>
+                <div *ngIf="this.message?.length! == 0" class="alert alert-success" style="background-color: #8dc091">You have already answered</div>
+            </ng-template>
 
         </form>
 

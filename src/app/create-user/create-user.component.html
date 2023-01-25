@@ -10,17 +10,17 @@
                 <label for="username">Username</label>
                 <input type="text" name="username" [(ngModel)]="form.username" placeholder="Username" required
                     minlength="2" maxlength="20" #username="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && username.errors }" class="form-control" />
+                    [ngClass]="{ 'is-invalid': f.submitted && username.errors }" class="form-control"
+                    (keypress)="setUsernameMessage($event)" (keypress)="noSpace($event)" />
 
                 <span></span>
-
-                <!-- username errors -->
+                
                 <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="username.errors['required']">Username is required</div>
                     <div *ngIf="username.errors['minlength']">Username must be at least 2 characters</div>
                     <div *ngIf="username.errors['maxlength']">Username must be at most 20 characters</div>
                 </div>
-
+                <div *ngIf="this.usernameMessage?.length! > 0" style="color: #dc3545; font-size: 80%;">{{ this.usernameMessage }}</div>
             </div>
 
             <!-- password -->
@@ -28,16 +28,38 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" [(ngModel)]="form.password" placeholder="Password" required
                     minlength="8" maxlength="120" #password="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && password.errors }" class="form-control" />
+                    [ngClass]="{ 'is-invalid': f.submitted && password.errors }" class="form-control" 
+                    (keypress)="noSpace($event)" (keyup)="checkPassword($event)" />
 
                 <span></span>
 
-                <!-- password errors -->
                 <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="password.errors['required']">Password is required</div>
                     <div *ngIf="password.errors['minlength']">Password must be at least 8 characters</div>
                     <div *ngIf="password.errors['maxlength']">Password must be at most 120 characters</div>
                 </div>
+                
+            </div>
+
+            <!-- verify password -->
+            <div class="form-group">
+                <label for="verifyPassword">Verify Password</label>
+                <input type="password" name="verifyPassword" [(ngModel)]="verifyPassword" placeholder="Verify Password" required
+                    minlength="8" maxlength="120" #Password="ngModel"
+                    [ngClass]="{ 'is-invalid': Password.errors }" class="form-control" 
+                    (keypress)="noSpace($event)" (keyup)="checkPassword($event)" />
+
+                <span></span>
+
+                <div *ngIf="Password.errors && f.submitted" class="invalid-feedback">
+                    <div *ngIf="Password.errors['required']">Password is required</div>
+                    <div *ngIf="Password.errors['minlength']">Password must be at least 8 characters</div>
+                    <div *ngIf="Password.errors['maxlength']">Password must be at most 120 characters</div>
+                </div>
+                
+                <div *ngIf="this.passwordMessage?.length! > 0" style="color: #dc3545; font-size: 80%;">{{ this.passwordMessage }}</div>
+
+                
             </div>
 
             <!-- email -->
@@ -45,17 +67,18 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" [(ngModel)]="form.email" placeholder="sleepyJoe69@gmail.com" email
                     required minlength="10" maxlength="50" #email="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && email.errors }" class="form-control" />
+                    [ngClass]="{ 'is-invalid': f.submitted && email.errors }" class="form-control"
+                    (keypress)="setEmailMessage($event)" (keypress)="noSpace($event)" />
 
                 <span></span>
 
-                <!-- email errors -->
                 <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="email.errors['required']">Email is required</div>
                     <div *ngIf="email.errors['email']">Invalid email</div>
                     <div *ngIf="email.errors['minlength']">Email must be at least 10 characters</div>
                     <div *ngIf="email.errors['maxlength']">Email must be at most 120 characters</div>
                 </div>
+                <div *ngIf="this.emailMessage?.length! > 0" style="color: #dc3545; font-size: 80%;">{{ this.emailMessage }}</div>
             </div>
 
             <!-- roles -->
@@ -88,12 +111,11 @@
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" [(ngModel)]="form.firstName" placeholder="Joe" required
                     minlength="2" maxlength="20" #firstName="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }" class="form-control" />
+                    [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }" class="form-control" 
+                    (keypress)="noSpace($event)"/>
 
                 <span></span>
 
-
-                <!-- firstName errors -->
                 <div *ngIf="firstName.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="firstName.errors['required']">First Name is required</div>
                     <div *ngIf="firstName.errors['minlength']">First Name must be at least 2 characters</div>
@@ -106,10 +128,9 @@
                 <label for="lastName">Last Name</label>
                 <input class="form-control" type="text" name="lastName" [(ngModel)]="form.lastName" placeholder="Biden"
                     required minlength="2" maxlength="20" #lastName="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }" />
+                    [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }" (keypress)="noSpace($event)" />
                 <span></span>
 
-                <!-- lastName errors -->
                 <div *ngIf="lastName.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="lastName.errors['required']">Last Name is required</div>
                     <div *ngIf="lastName.errors['minlength']">Last Name must be at least 2 characters</div>
@@ -121,37 +142,49 @@
             <div class="form-group">
                 <label for="afm">Afm</label>
                 <input (keypress)="numberOnly($event)" class="form-control" type="text" name="afm"
-                    [(ngModel)]="form.afm" placeholder="9 digit integer (for example: 123456789)" required minlength="9"
-                    maxlength="9" #afm="ngModel" [ngClass]="{ 'is-invalid': f.submitted && afm.errors }" />
+                    [(ngModel)]="form.afm" placeholder="9 digits (ex: 123456789)" required minlength="9"
+                    maxlength="9" #afm="ngModel" [ngClass]="{ 'is-invalid': f.submitted && afm.errors }" 
+                    (keypress)="setAfmMessage($event)"/>
                 <span></span>
 
-                <!-- afm errors -->
                 <div *ngIf="afm.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="afm.errors['required']">Afm is required</div>
                     <div *ngIf="afm.errors['minlength']">Afm must be 9 digits</div>
                     <div *ngIf="afm.errors['maxlength']">Afm must be 9 digits</div>
                 </div>
+                <div *ngIf="this.afmMessage?.length! > 0" style="color: #dc3545; font-size: 80%;">{{ this.afmMessage }}</div>
             </div>
 
             <!-- amka -->
             <div class="form-group">
                 <label for="amka">Amka</label>
                 <input (keypress)="numberOnly($event)" class="form-control" type="text" name="amka"
-                    [(ngModel)]="form.amka" placeholder="11 digit integer (for example: 12345678910)" required
+                    [(ngModel)]="form.amka" placeholder="11 digits (ex: 12345678910)" required
                     minlength="11" maxlength="11" #amka="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && amka.errors }" />
+                    [ngClass]="{ 'is-invalid': f.submitted && amka.errors }" 
+                    (keypress)="setAmkaMessage($event)" />
                 <span></span>
 
-                <!-- amka errors -->
                 <div *ngIf="amka.errors && f.submitted" class="invalid-feedback">
                     <div *ngIf="amka.errors['required']">Amka is required</div>
                     <div *ngIf="amka.errors['minlength']">Amka must be 11 digits</div>
                     <div *ngIf="amka.errors['maxlength']">Amka must be 11 digits</div>
                 </div>
+                <div *ngIf="this.amkaMessage?.length! > 0" style="color: #dc3545; font-size: 80%;">{{ this.amkaMessage }}</div>
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            <!-- <button *ngIf="this.passwordMessage?.length! == 0 else elseBlock" 
+                type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+
+            <ng-template #elseBlock>
+                <button *ngIf="this.passwordMessage?.length! > 0" disabled type="submit" 
+                    class="btn btn-primary btn-lg btn-block">Submit</button>
+            </ng-template> -->
+
+            <button [disabled]="!(this.passwordMessage.length == 0)" 
+                type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+
         </form>
     </div>
 </div>

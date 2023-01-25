@@ -99,6 +99,13 @@ export class StorageService {
     localStorage.setItem("updateUserId", userId.toString());
   }
 
+  public removeUpdatedUserId(): void {
+    const id = localStorage.getItem("updateUserId");
+    if (id) {
+      localStorage.removeItem("updateUserId");
+    }
+  }
+
   public getUpdatedUserId(): number {
     const userId = localStorage.getItem("updateUserId");
     if (userId) {

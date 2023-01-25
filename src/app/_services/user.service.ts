@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { AppUser, CreateOrUpdateUser } from '../_helpers/app-user';
-import { UserContract } from '../_helpers/contract';
+import { Contract, UserContract } from '../_helpers/contract';
+import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8080/';
+const API_URL = 'http://localhost:8080/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,31 +17,35 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserList() {
-    return this.http.get<AppUser[]>(API_URL + 'users', { responseType: 'json' });
+    return this.http.get<AppUser[]>(API_URL);
   }
 
-  createUser(newUser: CreateOrUpdateUser) {
-    return this.http.post<CreateOrUpdateUser>(API_URL + 'registerUser', newUser);
+  postUser(newUser: CreateOrUpdateUser) {
+    return this.http.post<CreateOrUpdateUser>(API_URL, newUser);
   }
 
-  getUpdateUser(userId: number) {
-    return this.http.get<CreateOrUpdateUser>(API_URL + 'updateUser/' + userId);
+  getOneUser(userId: number) {
+    return this.http.get<CreateOrUpdateUser>(`${API_URL}/${userId}`);
   }
 
-  putUpdateUser(userId: number, updatedUser: CreateOrUpdateUser) {
-    return this.http.put<CreateOrUpdateUser>(API_URL + 'updateUser/' + userId, updatedUser);
-  }
-
-  viewLoggedInProfile(userId: number) {
-    return this.http.get<AppUser>(API_URL + 'users/' + userId, { responseType: 'json' });
+  putUser(userId: number, updatedUser: CreateOrUpdateUser) {
+    return this.http.put<CreateOrUpdateUser>(`${API_URL}/${userId}`, updatedUser);
   }
 
   deleteUser(userId: number) {
-    return this.http.delete<AppUser>(API_URL + 'users/' + userId, { responseType: 'json' });
+    return this.http.delete<AppUser>(`${API_URL}/${userId}`);
   }
 
-  getMyContract(userId: number) {
-    return this.http.get<UserContract>(API_URL + 'users/' + userId + '/contract');
+  getUserContract(userId: number) {
+    return this.http.get<UserContract>(`${API_URL}/${userId}/contract`);
+  }
+
+  postUserContract(afm: string[], text: string, lawyerId: number): Observable<any> {
+    return this.http.post(`${API_URL}/${lawyerId}/contract`, {afm, text}, httpOptions);
+  }
+
+  answerUserContract(userId: number) {
+    return this.http.put<Contract>(`${API_URL}/${userId}/contract`, null);
   }
 }
 

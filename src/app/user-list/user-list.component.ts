@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent {
-
   isLoggedIn = false;
   isAdmin = false;
 
@@ -26,16 +25,14 @@ export class UserListComponent {
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-    
+
     if (!this.isLoggedIn) {
       this.router.navigateByUrl('/login');
-    } 
-    else {
+    } else {
       this.isAdmin = this.storageService.getUser().roles.includes('ADMIN');
       if (!this.isAdmin) {
         this.router.navigateByUrl('/home');
-      }
-      else {
+      } else {
         this.userService.getUserList().subscribe({
           next: (data) => {
             this.appUserList = data;
@@ -59,31 +56,39 @@ export class UserListComponent {
         });
       }
     }
-    
   }
 
   updateUser(userId: number) {
     this.storageService.saveUpdatedUserId(userId);
-    this.router.navigate(['/updateUser']);
+    this.router.navigate(['/update-user']);
   }
 
   deleteUser(user: AppUser) {
-    this.userService.deleteUser(user.id).subscribe({
-      next: (data) => {
-      },
-      error: (err) => {
-        this.message = err.error.message;
-        window.alert([this.message]);
-        if (err.error) {
-        } else {
-          this.message = 'Error with status: ' + err.status;
-        }
-      }
-    });
+    if(confirm("Delete user " + user.username + "?")) {
+      this.userService.deleteUser(user.id).subscribe({
+        next: (data) => {
+        },
+        error: (err) => {
+          if (this.message.length == 0) {
+            this.message = err.error.message;
+            setTimeout(() => {
+              this.message = '';
+          }, 3000);
+          }
+          // window.alert([this.message]);
+          if (err.error) {
+          } else {
+            this.message = 'Error with status: ' + err.status;
+          }
+        },
+      });
 
-    const index = this.appUserList.indexOf(user, 0 );
-    if (index > -1 && !user.strRoles.includes('ADMIN')) {
-      this.appUserList.splice(index, 1);
+      const index = this.appUserList.indexOf(user, 0);
+      if (index > -1 && !user.strRoles.includes('ADMIN')) {
+        this.appUserList.splice(index, 1);
+      }
     }
+    
   }
+
 }

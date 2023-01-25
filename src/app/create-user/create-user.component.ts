@@ -32,9 +32,17 @@ export class CreateUserComponent {
     firstName: '',
     lastName: '',
     role: [],
-    afm: 0,
-    amka: 0
+    afm: '',
+    amka: ''
   };
+
+  verifyPassword = '';
+
+  usernameMessage = '';
+  passwordMessage = '';
+  emailMessage = '';
+  afmMessage = '';
+  amkaMessage = '';
 
   isLoggedIn = false;
   isAdmin = false;
@@ -88,20 +96,53 @@ export class CreateUserComponent {
       this.newUser.afm = afm;
       this.newUser.amka = amka;
 
-      this.userService.createUser(this.newUser).subscribe({
+      this.userService.postUser(this.newUser).subscribe({
         next: (data) => {
         this.router.navigate(['/users']);
         },
         error: (err) => {
           this.message = err.error.message;
-          window.alert([this.message]);
+          if (this.message.includes('Username')) {
+            this.usernameMessage = this.message;
+          } else if (this.message.includes('Email')) {
+            this.emailMessage = this.message;
+          } else if (this.message.includes('Afm'))  {
+            this.afmMessage = this.message;
+          } else if ((this.message.includes('Amka'))) {
+            this.amkaMessage = this.message;
+          }
+          // window.alert([this.message]);
           if (err.error) {
-            // this.content = JSON.parse(err.error).message;
+            // this.message = JSON.parse(err.error).message;
           } else {
             this.message = 'Error with status: ' + err.status;
           }
         }
       })      
+  }
+
+  setUsernameMessage(event: { which: any; keyCode: any }): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+      this.usernameMessage = '';
+      return true;
+  }
+
+  setEmailMessage(event: { which: any; keyCode: any }): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+      this.emailMessage = '';
+      return true;
+  }
+
+  setAfmMessage(event: { which: any; keyCode: any }): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+      this.afmMessage = '';
+      return true;
+  }
+
+  setAmkaMessage(event: { which: any; keyCode: any }): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+      this.amkaMessage = '';
+      return true;
   }
 
   numberOnly(event: { which: any; keyCode: any; }): boolean {
@@ -111,4 +152,22 @@ export class CreateUserComponent {
     }
     return true;
   }
+
+  noSpace(event: { which: any; keyCode: any; }): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode == 32) {
+      return false;
+    }
+    return true;
+  }
+
+  checkPassword(event: { which: any; keyCode: any; }): void {
+    if (this.form.password == this.verifyPassword) {
+      this.passwordMessage = '';
+    }
+    else {
+      this.passwordMessage = "Passwords don't match";
+    }
+  }
+
 }

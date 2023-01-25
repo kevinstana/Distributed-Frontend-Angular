@@ -11,19 +11,21 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { ViewMyProfileComponent } from './view-my-profile/view-my-profile.component';
 import { ViewMyContractComponent } from './view-my-contract/view-my-contract.component';
 import { ViewContractNotaryComponent } from './view-contract-notary/view-contract-notary.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'users', component: UserListComponent },
-  { path: 'createUser', component: CreateUserComponent },
+  { path: 'create-user', component: CreateUserComponent },
   { path: 'contracts', component: ContractListComponent },
-  { path: 'createContract', component: CreateContractComponent },
-  { path: 'updateUser', component: UpdateUserComponent },
-  { path: 'myProfile', component: ViewMyProfileComponent },
-  { path: 'myContract', component: ViewMyContractComponent },
-  { path: 'viewContract', component: ViewContractNotaryComponent },
-  { path: '**', component: HomeComponent }
+  { path: 'create-contract', component: CreateContractComponent },
+  { path: 'update-user', component: UpdateUserComponent },
+  { path: 'my-profile', component: ViewMyProfileComponent },
+  { path: 'my-contract', component: ViewMyContractComponent },
+  { path: 'view-contract', component: ViewContractNotaryComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

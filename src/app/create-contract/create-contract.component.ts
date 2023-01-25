@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContractService } from '../_services/contract.service';
 import { StorageService } from '../_services/storage.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-create-contract',
@@ -22,9 +22,14 @@ export class CreateContractComponent {
   isLoggedIn = false;
   isLawyer =  false;
 
+  strAfm1 = '';
+  strAfm2 = '';
+  strAfm3 = '';
+  strAfm4 = '';
+
   constructor(
     private storageService: StorageService,
-    private contractService: ContractService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -44,18 +49,26 @@ export class CreateContractComponent {
   onSubmit(): void {
     const { afm1, afm2, afm3, afm4, text } = this.form;
 
-    let afms: number[] = [afm1, afm2, afm3, afm4];
+    this.strAfm1 = ''+afm1;
+    this.strAfm2 = ''+afm2;
+    this.strAfm3 = ''+afm3;
+    this.strAfm4 = ''+afm4;
+
+    let afms: string[] = [this.strAfm1, this.strAfm2, this.strAfm3, this.strAfm4];
 
     let lawyerId = this.storageService.getUser().id;
     
-    this.contractService.createContract(afms, text, lawyerId).subscribe({
+    this.userService.postUserContract(afms, text, lawyerId).subscribe({
       next: (data) => {
         this.message = data.message;
-        this.router.navigate(['/myContract']);
+        this.router.navigate(['/my-contract']);
       },
       error: (err) => {
         this.message = err.error.message;
-        window.alert([this.message]);
+      //   setTimeout(() => {
+      //     this.message = '';
+      // }, 10000);
+        // window.alert([this.message]);
         if (err.error) {
           // this.content = JSON.parse(err.error).message;
         } else {

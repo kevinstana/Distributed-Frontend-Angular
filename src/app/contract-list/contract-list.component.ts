@@ -54,18 +54,32 @@ export class ContractListComponent {
     
   }
 
-  deleteContract(contractId: number) {
-    this.contractService.deleteContract(contractId).subscribe((data) => {});
-    window.location.reload();
+  deleteContract(contract: Contract) {
+    if(confirm("Delete contract with id " + contract.id + "?")) {
+      this.contractService.deleteContract(contract.id).subscribe((data) => {
+      });
+  
+      const index = this.contractList!.indexOf(contract, 0);
+      if (index > -1) {
+        this.contractList!.splice(index, 1);
+      }
+    }
   }
 
-  forceDelete(contractId: number) {
-    this.contractService.forceDeleteContract(contractId).subscribe((data) => {});
-    window.location.reload();
+  forceDeleteContract(contract: Contract) {
+    if(confirm("Delete contract with id " + contract.id + "?")) {
+      this.contractService.forceDeleteContract(contract.id).subscribe((data) => {
+    
+      });
+      const index = this.contractList!.indexOf(contract, 0);
+      if (index > -1) {
+        this.contractList!.splice(index, 1);
+      }
+    }
   }
 
   viewContractNotary(contractId: number) {
     this.storageService.saveContractId(contractId);
-    this.router.navigate(['/viewContract']);
+    this.router.navigate(['/view-contract']);
   }
 }

@@ -7,21 +7,23 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   form: any = {
     username: null,
-    password: null
+    password: null,
   };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, 
-              private storageService: StorageService,
-              private router: Router,
-              private app: AppComponent) { }
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService,
+    private router: Router,
+    private app: AppComponent
+  ) {}
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -31,23 +33,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.form;
-              
+
     this.authService.login(username, password).subscribe({
-      next: data => {
+      next: (data) => {
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
         this.app.isLoggedIn = true;
         this.router.navigate(['/home']);
       },
-      error: err => {
+      error: (err) => {
         if (err.error.message == undefined) {
           this.errorMessage = 'Server is down';
-        }
-        else {
+        } else {
           this.errorMessage = err.error.message;
         }
-          this.isLoginFailed = true;
-      }
+        this.isLoginFailed = true;
+      },
     });
   }
 

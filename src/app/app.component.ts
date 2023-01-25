@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { StorageService } from './_services/storage.service';
 
 @Component({

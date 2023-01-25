@@ -6,8 +6,8 @@ export interface AppUser {
     email: string;
     firstName: string;
     lastName: string;
-    afm: number;
-    amka: number;
+    afm: string;
+    amka: string;
     answer: string;
     roles: [
         {
@@ -25,8 +25,8 @@ export interface CreateOrUpdateUser {
     role: string[];
     firstName: string;
     lastName: string;
-    afm: number;
-    amka: number;
+    afm: string;
+    amka: string;
 }
 
 

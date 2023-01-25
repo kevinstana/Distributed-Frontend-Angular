@@ -18,6 +18,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { ViewMyProfileComponent } from './view-my-profile/view-my-profile.component';
 import { ViewMyContractComponent } from './view-my-contract/view-my-contract.component';
 import { ViewContractNotaryComponent } from './view-contract-notary/view-contract-notary.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ViewContractNotaryComponent } from './view-contract-notary/view-contrac
     ViewMyProfileComponent,
     ViewMyContractComponent,
     ViewContractNotaryComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

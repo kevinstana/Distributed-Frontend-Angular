@@ -1,4 +1,3 @@
-
 .h1 {
   margin-top: 50px;
 }
@@ -45,10 +44,10 @@ form .txt-field {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .txt-field label {
@@ -73,14 +72,14 @@ input:-webkit-autofill:active{
   transition: .5s;
 }
 
-.txt-field input:focus ~ label,
-.txt-field input:valid ~ label {
+.txt-field input:focus~label,
+.txt-field input:valid~label {
   top: -5px;
   color: white;
 }
 
-.txt-field input:focus ~ span::before,
-.txt-field input:valid ~ span::before {
+.txt-field input:focus~span::before,
+.txt-field input:valid~span::before {
   width: 100%;
 }
 
@@ -103,14 +102,10 @@ input[type="submit"]:hover {
   transition: .5s;
 }
 
-/* might delete signup link styles */
-
-.signup_link {
-  margin: 45px 0;
-  text-align: center;
-
-}
-
 .invalid-feedback {
   position: absolute;
+}
+
+.form-group {
+  padding-bottom: 30px;
 }
