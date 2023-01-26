@@ -40,6 +40,12 @@ Check version with
 ng version
 ```
   
+or  
+
+```bash
+ng --version
+```
+  
 ## Run the application
 
 First you have to run the backend application from the "distributed" repository.  
