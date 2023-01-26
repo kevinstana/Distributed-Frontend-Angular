@@ -28,7 +28,7 @@ check verion with
 node -v
 ```
   
-## Intsall Angular CLI
+## Install Angular CLI
 
 ```bash
 sudo npm install -g @angular/cli
