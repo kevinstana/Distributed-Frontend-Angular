@@ -45,31 +45,49 @@ export class ViewContractNotaryComponent {
         this.router.navigateByUrl('/home');
       } else {
         this.contractId = this.storageService.getContractId();
-        this.contractService.viewContractNotary(this.contractId!).subscribe({
-          next: (data) => {
-            this.contract = data;
-            this.member1 = this.contract.members[0].split(': ');
-            this.member2 = this.contract.members[1].split(': ');
-            this.member3 = this.contract.members[2].split(': ');
-            this.member4 = this.contract.members[3].split(': ');
-          },
-          error: (err) => {
-            this.message = err.error.message;
-            window.alert([this.message]);
-            this.router.navigate(['/home']);
-            if (err.error) {
-              // this.content = JSON.parse(err.error).message;
-            } else {
-              this.message = 'Error with status: ' + err.status;
-            }
-          },
-        });
+        if (this.contractId != -1) {
+          this.contractService.viewContractNotary(this.contractId!).subscribe({
+            next: (data) => {
+              this.contract = data;
+              this.member1 = this.contract.members[0].split(': ');
+              this.member2 = this.contract.members[1].split(': ');
+              this.member3 = this.contract.members[2].split(': ');
+              this.member4 = this.contract.members[3].split(': ');
+            },
+            error: (err) => {
+              this.message = err.error.message;
+              // window.alert([this.message]);
+              this.router.navigate(['/home']);
+              if (err.error) {
+                // this.content = JSON.parse(err.error).message;
+              } else {
+                this.message = 'Error with status: ' + err.status;
+              }
+            },
+          });
+        } else {
+          this.router.navigate(['/home']);
+        }
       }
     }
   }
 
   approveContract(contractId: number) {
-    this.contractService.approveContractNotary(contractId).subscribe((data) => {});
-    window.location.reload();
+    this.contractService.approveContractNotary(contractId).subscribe({
+      next: (data) => {
+        window.location.reload();
+      },
+      error: (err) => {
+        this.message = err.error.message;
+        console.log(this.message);
+        // this.router.navigate(['/home']);
+        // window.alert([this.message]);
+        if (err.error) {
+          // this.content = JSON.parse(err.error).message;
+        } else {
+          this.message = 'Error with status: ' + err.status;
+        }
+      },
+    });
   }
 }
