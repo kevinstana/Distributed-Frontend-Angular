@@ -53,14 +53,20 @@ First you have to run the backend application from the "distributed" repository.
 Once that is done, open the directory in which you downloaded the frontend repository (in the terminal) and run  
   
 ```bash
-ng serve -o
+npm intall
 ```
   
 you might have to also run  
   
   ```bash
-  npm install
+  npm audit fix
   ```
+  
+Then run  
+
+```bash
+ng serve -o
+```
   
 `ng serve -o` will automatically open the browser.  
   
