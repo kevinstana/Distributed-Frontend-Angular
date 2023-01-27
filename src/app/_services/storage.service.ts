@@ -130,4 +130,11 @@ export class StorageService {
 
     return -1;
   }
+
+  public removeContractId(): void {
+    const id = localStorage.getItem("contractId");
+    if (id) {
+      localStorage.removeItem("contractId");
+    }
+  }
 }

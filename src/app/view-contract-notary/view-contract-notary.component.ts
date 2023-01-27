@@ -66,10 +66,14 @@ export class ViewContractNotaryComponent {
             },
           });
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/contracts']);
         }
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.storageService.removeContractId();
   }
 
   approveContract(contractId: number) {
