@@ -56,7 +56,7 @@ Once that is done, open the directory in which you downloaded the frontend repos
 npm intall
 ```
   
-you might have to also run  
+you might also have to run  
   
   ```bash
   npm audit fix
