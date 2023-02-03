@@ -53,7 +53,7 @@ First you have to run the backend application from the "distributed" repository.
 Once that is done, open the directory in which you downloaded the frontend repository (in the terminal) and run  
   
 ```bash
-npm intall
+npm install
 ```
   
 you might also have to run  
