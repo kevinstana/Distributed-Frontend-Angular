@@ -74,7 +74,7 @@ or
 mvn spring-boot:run
 ```
   
-Once that is done, run
+Once that is done, run (in new terminal)
   
 ```bash
 git clone https://github.com/kevinstana/distributed-frontend-angular
