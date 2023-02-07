@@ -109,4 +109,7 @@ ng serve
 ```
   
 open the browser and navigate to
-`http://localhost:4200/`
+`http://localhost:4200/`  
+  
+The username is "admin" and the password is "password"  
+  
