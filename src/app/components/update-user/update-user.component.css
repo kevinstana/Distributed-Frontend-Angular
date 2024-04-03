@@ -1,0 +1,23 @@
+h1 {
+    position: absolute;
+    padding-bottom: 10vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    padding-bottom: 10vh;
+}
+
+.container-fluid {
+    margin-top: 13vh; 
+    color: white;
+}
+
+/* .form-group {
+    padding-bottom: 1vh;
+}
+
+.btn {
+    margin-top: 3vh;
+} */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppUser, CreateOrUpdateUser } from '../_helpers/app-user';
-import { Contract, UserContract } from '../_helpers/contract';
+import { User, CreateUser, UpdateUser, ViewUser } from '../_helpers/app-user';
+import { Contract, ViewContract } from '../_helpers/contract';
 import { Observable } from 'rxjs';
 
 const API_URL = 'http://localhost:8080/users';
@@ -16,36 +16,38 @@ const httpOptions = {
 export class UserService {
   constructor(private http: HttpClient) {}
 
+
   getUserList() {
-    return this.http.get<AppUser[]>(API_URL);
+    return this.http.get<User[]>(API_URL);
   }
 
-  postUser(newUser: CreateOrUpdateUser) {
-    return this.http.post<CreateOrUpdateUser>(API_URL, newUser);
+
+  postUser(user: CreateUser) {
+    return this.http.post<CreateUser>(API_URL, user);
   }
 
-  getOneUser(userId: number) {
-    return this.http.get<CreateOrUpdateUser>(`${API_URL}/${userId}`);
+
+  getUserForChange(userId: number) {
+    let url: string = `${API_URL}/${userId}`;
+    return this.http.get<UpdateUser>(url);
   }
 
-  putUser(userId: number, updatedUser: CreateOrUpdateUser) {
-    return this.http.put<CreateOrUpdateUser>(`${API_URL}/${userId}`, updatedUser);
+
+  viewProfile(userId: number) {
+    let url: string = `${API_URL}/${userId}`;
+    return this.http.get<ViewUser>(url);
   }
 
+
+  putUser(userId: number, user: UpdateUser) {
+    let url: string = `${API_URL}/${userId}`;
+    return this.http.put<UpdateUser>(url, user);
+  }
+
+  
   deleteUser(userId: number) {
-    return this.http.delete<AppUser>(`${API_URL}/${userId}`);
-  }
-
-  getUserContract(userId: number) {
-    return this.http.get<UserContract>(`${API_URL}/${userId}/contract`);
-  }
-
-  postUserContract(afm: string[], text: string, lawyerId: number): Observable<any> {
-    return this.http.post(`${API_URL}/${lawyerId}/contract`, {afm, text}, httpOptions);
-  }
-
-  answerUserContract(userId: number) {
-    return this.http.put<Contract>(`${API_URL}/${userId}/contract`, null);
+    let url: string = `${API_URL}/${userId}`;
+    return this.http.delete<User>(url);
   }
 }
 

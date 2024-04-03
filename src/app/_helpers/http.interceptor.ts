@@ -10,8 +10,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
-      //withCredentials: true,
-      headers: req.headers.set('Authorization', `Bearer ${this.storageService.getUser().accessToken}`)
+      headers: req.headers.set('Authorization', `Bearer ${this.storageService.getAccessToken()}`)
     });
 
     return next.handle(req);

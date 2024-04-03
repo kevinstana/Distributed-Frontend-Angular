@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { AuthorizedUser } from '../_helpers/auth-user';
 
-const USER_KEY = 'auth-user';
+const USER_KEY = 'authorized-user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,44 +14,48 @@ export class StorageService {
     localStorage.clear();
   }
 
-  // User handling
-  public saveUser(user: any): void {
-    localStorage.removeItem(USER_KEY);
+  public saveUser(user: AuthorizedUser): void {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
+    let user = localStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
 
-    return {};
+    return null;
   }
 
-  // jwt
-  public getBearerToken(): any {
-    const user = localStorage.getItem(USER_KEY);
+  public getAccessToken(): string {
+    let user = this.getUser();
     if (user) {
-      return JSON.stringify(user[4]).toString;
+      return user.accessToken;
     }
+
+    return '';
   }
 
-  // roles and loggin check
   public isLoggedIn(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user = this.getUser();
     if (user) {
       return true;
     }
-
     return false;
   }
 
+  private loginSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+  currentLogin = this.loginSource.asObservable();
+  
+  changeLogin(login: boolean) {
+    this.loginSource.next(login);
+  }
+
+
   public isAdmin(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('ADMIN')) {
+      if (user.roles.includes('ADMIN')) {
         return true;
       }
     }
@@ -58,10 +64,9 @@ export class StorageService {
   }
 
   public isNotary(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('NOTARY')) {
+      if (user.roles.includes('NOTARY')) {
         return true;
       }
     }
@@ -70,10 +75,9 @@ export class StorageService {
   }
 
   public isLawyer(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('LAWYER')) {
+      if (user.roles.includes('LAWYER')) {
         return true;
       }
     }
@@ -82,10 +86,9 @@ export class StorageService {
   }
 
   public isClient(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('CLIENT')) {
+      if (user.roles.includes('CLIENT')) {
         return true;
       }
     }

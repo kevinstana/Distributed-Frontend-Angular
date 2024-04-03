@@ -5,20 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
-import { IdentificationComponent } from './identification/identification.component';
-import { ContractListComponent } from './contract-list/contract-list.component';
-import { CreateContractComponent } from './create-contract/create-contract.component';
-import { CreateUserComponent } from './create-user/create-user.component';
-import { UpdateUserComponent } from './update-user/update-user.component';
-import { ViewMyProfileComponent } from './view-my-profile/view-my-profile.component';
-import { ViewMyContractComponent } from './view-my-contract/view-my-contract.component';
-import { ViewContractNotaryComponent } from './view-contract-notary/view-contract-notary.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { IdentificationComponent } from './components/identification/identification.component';
+import { ContractListComponent } from './components/contract-list/contract-list.component';
+import { CreateContractComponent } from './components/create-contract/create-contract.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { ViewMyProfileComponent } from './components/view-my-profile/view-my-profile.component';
+import { ViewContractClientComponent } from './components/view-contract-client/view-contract-client.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ViewContractNotaryComponent } from './components/view-contract-notary/view-contract-notary.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CreateUserComponent,
     UpdateUserComponent,
     ViewMyProfileComponent,
-    ViewMyContractComponent,
-    ViewContractNotaryComponent,
+    ViewContractClientComponent,
     NotFoundComponent,
+    NavbarComponent,
+    ViewContractNotaryComponent,
+    ViewContractNotaryComponent
   ],
   imports: [
     BrowserModule,

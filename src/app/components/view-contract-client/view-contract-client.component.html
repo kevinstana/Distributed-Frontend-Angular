@@ -1,0 +1,124 @@
+<div class="container">
+
+
+    <!-- Form -->
+    <div class="container-fluid">
+        <h1>Viewing your contract</h1>
+        <form name="form">
+
+            <!-- <div class="container" style="padding-bottom: 1%"> -->
+                
+                <!-- dateCreated -->
+                <div class="form-group overflow-auto">
+                    <label for="dateCreated">Date Created</label>
+                    <input type="text" 
+                            name="dateCreated"
+                            [value]="this.contract.dateCreated | date:'medium'"
+                            class="form-control"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- dateApproved -->
+                <div class="form-group">
+                    <label for="dateApproved">Date Approved</label>
+                    <input type="text" 
+                            name="dateApproved"
+                            [value]="this.contract.dateApproved | date:'medium'"
+                            class="form-control"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- status -->
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" 
+                            name="status"
+                            [value]="this.contract.status"
+                            class="form-control"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- member1 -->
+                <div class="form-group">
+                    <label for="member1">{{ this.member1[0] }}</label>
+                    <input class="form-control" 
+                            type="text"
+                            name="member1"
+                            [value]="this.member1[1]"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- member2 -->
+                <div class="form-group">
+                    <label for="member2">{{ this.member2[0] }}</label>
+                    <input class="form-control" 
+                            type="text"
+                            name="member2"
+                            [value]="this.member2[1]"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- member3 -->
+                <div class="form-group">
+                    <label for="member3">{{ this.member3[0] }}</label>
+                    <input class="form-control" 
+                            type="text"
+                            name="member3"
+                            [value]="this.member3[1]"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- member4 -->
+                <div class="form-group">
+                    <label for="member4">{{ this.member4[0] }}</label>
+                    <input class="form-control" 
+                            type="text"
+                            name="member4"
+                            [value]="this.member4[1]"
+                            [readOnly]="true"/>
+                </div>
+
+                <!-- text area -->
+                <div class="form-group">
+                    <label>Text</label>
+                    <textarea class="form-control" 
+                            type="text" 
+                            name="text"
+                            [value]="this.contract.text"
+                            [readOnly]="true">
+                    </textarea>
+                </div>
+
+                <button 
+                    *ngIf="this.myContractAnswer !== 'Yes'" 
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    (click)="answerContract()"
+                    style="margin-bottom: 30px; margin-top: 37px;"
+                    >Agree
+                </button>
+
+                <!-- <div *ngIf="contract.status === 'In Progress'"
+                    class="alert alert-warning" >
+                        All members need to answer before you can approve the contract
+                </div> -->
+
+                <!-- approved message -->
+                <div *ngIf="this.myContractAnswer === 'Yes'" 
+                    class="alert alert-success" 
+                    style="background-color: #8dc091"
+                    >You have agreed to this contract
+                </div>
+
+                <button 
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    [routerLink]="''"
+                    >Back
+                </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,199 @@
+<div class="container">
+    <div class="container-fluid">
+        <h1>Create a Contract</h1>
+
+    <!-- Error Message -->
+    <div *ngIf="this.message"
+        class="alert alert-danger" 
+        style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="aler alert-danger">
+        {{ this. message }}
+    </div>
+        <input class="btn btn-danger" type="button" value="Ok" (click)="dangerOk()">
+    </div>
+        
+        <!-- Form -->
+        <form 
+            name="form"
+            [formGroup]="form"
+            (ngSubmit)="$event.preventDefault(); submitForm()"
+        >
+
+            <!-- Member 1 afm -->
+            <div class="form-group">
+                <label for="afm1">Member 1 Afm</label>
+                <input 
+                    name="afm1"
+                    type="text"
+                    class="form-control"
+                    placeholder="9 digits"
+                    formControlName="afm1"
+                    autocomplete="off"
+                />
+                
+                <!-- Error messages -->
+                <div *ngIf="form.get('afm1')?.invalid 
+                    && (form.get('afm1')?.dirty || form.get('afm1')?.touched)">
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm1')?.hasError('required')"
+                        >Afm is required
+                    </small>
+
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm1')?.hasError('minlength') 
+                        || form.get('afm1')?.hasError('maxlength') 
+                        || form.get('afm1')?.hasError('pattern')"
+                        >Afm needs to have exactly 9 numbers
+                    </small>
+                </div>
+
+            </div>
+
+            <!-- Member 2 afm -->
+            <div class="form-group">
+                <label for="afm2">Member 2 Afm</label>
+                <input 
+                    name="afm2"
+                    type="text"
+                    class="form-control"
+                    placeholder="9 digits"
+                    formControlName="afm2"
+                    autocomplete="off"
+                />
+                
+                <!-- Error messages -->
+                <div *ngIf="form.get('afm2')?.invalid 
+                    && (form.get('afm2')?.dirty || form.get('afm2')?.touched)">
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm2')?.hasError('required')"
+                        >Afm is required
+                    </small>
+
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm2')?.hasError('minlength') 
+                        || form.get('afm2')?.hasError('maxlength') 
+                        || form.get('afm2')?.hasError('pattern')"
+                        >Afm needs to have exactly 9 numbers
+                    </small>
+                </div>
+
+            </div>
+
+            <!-- Member 3 afm -->
+            <div class="form-group">
+                <label for="afm3">Member 3 Afm</label>
+                <input 
+                    name="afm3"
+                    type="text"
+                    class="form-control"
+                    placeholder="9 digits"
+                    formControlName="afm3"
+                    autocomplete="off"
+                />
+                
+                <!-- Error messages -->
+                <div *ngIf="form.get('afm3')?.invalid 
+                    && (form.get('afm3')?.dirty || form.get('afm3')?.touched)">
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm3')?.hasError('required')"
+                        >Afm is required
+                    </small>
+
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm3')?.hasError('minlength') 
+                        || form.get('afm3')?.hasError('maxlength') 
+                        || form.get('afm3')?.hasError('pattern')"
+                        >Afm needs to have exactly 9 numbers
+                    </small>
+                </div>
+
+            </div>
+
+            <!-- Member 4 afm -->
+            <div class="form-group">
+                <label for="afm4">Member 4 Afm</label>
+                <input 
+                    name="afm4"
+                    type="text"
+                    class="form-control"
+                    placeholder="9 digits"
+                    formControlName="afm4"
+                    autocomplete="off"
+                />
+                
+                <!-- Error messages -->
+                <div *ngIf="form.get('afm4')?.invalid 
+                    && (form.get('afm4')?.dirty || form.get('afm4')?.touched)">
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm4')?.hasError('required')"
+                        >Afm is required
+                    </small>
+
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('afm4')?.hasError('minlength') 
+                        || form.get('afm4')?.hasError('maxlength') 
+                        || form.get('afm4')?.hasError('pattern')"
+                        >Afm needs to have exactly 9 numbers
+                    </small>
+                </div>
+
+            </div>
+            
+
+            <!-- Contract Text -->
+            <div class="form-group">
+                <label for="text">Contract text</label>
+
+                <textarea 
+                    class="form-control"
+                    type="text"
+                    name="text"
+                    placeholder="Enter the text for the contract"
+                    formControlName="text"
+                    autocomplete="off">
+                </textarea>
+
+                <!-- Error messages -->
+                <div *ngIf="form.get('text')?.invalid 
+                    && (form.get('text')?.dirty || form.get('text')?.touched)">
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('text')?.hasError('required')"
+                        >Contract text is required
+                    </small>
+
+                    <small 
+                        class="text-danger"
+                        *ngIf="form.get('text')?.hasError('minlength') 
+                        || form.get('text')?.hasError('maxlength')"
+                        >Contract text needs to be at least 10 and at most 255 characters
+                    </small>
+                </div>
+
+            </div>
+
+            <button 
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                [disabled]="form.invalid"
+                >Create Contract
+            </button>
+
+            <button 
+                type="button"
+                class="btn btn-danger btn-lg btn-block"
+                [routerLink]="['']"
+                >Cancel
+            </button>
+
+        </form>
+    </div>
+</div>

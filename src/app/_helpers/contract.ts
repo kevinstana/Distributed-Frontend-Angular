@@ -1,3 +1,5 @@
+// used in contract list
+// and to delete contract
 export interface Contract {
     id: number;
     text: string;
@@ -6,7 +8,15 @@ export interface Contract {
     status: string;
 }
 
-export interface UserContract {
+
+export interface CreateContract {
+    lawyerId: number,
+    afms: Set<string | null | undefined>,
+    text: string | null | undefined
+}
+
+
+export interface ViewContract {
     text: string;
     dateCreated: string;
     dateApproved: string;
