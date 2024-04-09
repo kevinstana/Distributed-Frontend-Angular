@@ -4,7 +4,7 @@ import { AppUser, CreateOrUpdateUser } from '../_helpers/app-user';
 import { Contract, UserContract } from '../_helpers/contract';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8080/users';
+const API_URL = 'http://192.168.56.111:9090/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

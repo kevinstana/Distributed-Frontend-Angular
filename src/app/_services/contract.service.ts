@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Contract, UserContract } from "../_helpers/contract";
 
-const API_URL = 'http://localhost:8080/contracts';
+const API_URL = 'http://192.168.56.111:9090/contracts';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
