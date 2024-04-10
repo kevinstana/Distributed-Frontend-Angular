@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         if (err.error.message == undefined) {
-          this.errorMessage = 'Something went wrong';
+          // this.errorMessage = 'Something went wrong';
+          this.errorMessage = err.error.message;
         } else {
           this.errorMessage = err.error.message;
         }
