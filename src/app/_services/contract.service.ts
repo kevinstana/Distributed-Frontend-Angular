@@ -4,8 +4,8 @@ import { Observable } from "rxjs";
 import { Contract, ViewContract } from "../_helpers/contract";
 import { CreateContract } from "../_helpers/contract";
 
-const CONTRACTS_URL = '/contracts';
-const USER_CONTRACTS_URL = '/users';
+const CONTRACTS_URL = '/api/contracts';
+const USER_CONTRACTS_URL = '/api/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
