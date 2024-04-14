@@ -5,6 +5,7 @@ import { Contract, ViewContract } from '../_helpers/contract';
 import { Observable } from 'rxjs';
 
 const API_URL = '/api/users';
+// const API_URL = 'http://localhost:9090/api/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

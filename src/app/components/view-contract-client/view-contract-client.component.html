@@ -2,8 +2,10 @@
 
 
     <!-- Form -->
-    <div class="container-fluid">
-        <h1>Viewing your contract</h1>
+    <div 
+        *ngIf="!this.noContractMessage; else noContract"
+        class="container-fluid">
+        <h1>My contract</h1>
         <form name="form">
 
             <!-- <div class="container" style="padding-bottom: 1%"> -->
@@ -120,5 +122,18 @@
         </form>
 
     </div>
+
+    <ng-template #noContract>
+            <div style="left: 50%; transform: translate(-50%, -50%); position: absolute; margin-top: 30vh;">
+                <h2 style="color: white;">{{ this.noContractMessage }}</h2>
+                <button
+                    style="margin-top: 20px;"
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    [routerLink]="'/create-contract'"
+                    >Create One
+                </button>
+            </div>
+    </ng-template>
 
 </div>

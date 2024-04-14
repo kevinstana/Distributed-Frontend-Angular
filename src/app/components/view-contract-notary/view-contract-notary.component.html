@@ -98,9 +98,22 @@
                     >Agree
                 </button> -->
 
-                <div *ngIf="contract.status === 'In Progress'"
+                <div *ngIf="contract.status === 'IN_PROGRESS'"
                     class="alert alert-warning" >
                         All members need to answer before you can approve the contract
+                </div>
+
+                <div *ngIf="contract.status === 'PENDING_APPROVAL'" 
+                    class="btn btn-primary btn-lg btn-block"
+                    (click) = approveContract();
+                    style="margin-top: 30px; margin-bottom: 20px;"
+                    >Approve Contract
+                </div>
+
+                <div *ngIf="contract.status === 'APPROVED'"  
+                    class="alert alert-success" 
+                    style="background-color: #8dc091"
+                    >You have approved this contract
                 </div>
 
                 <button 

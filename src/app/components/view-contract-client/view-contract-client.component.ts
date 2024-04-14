@@ -23,6 +23,7 @@ export class ViewContractClientComponent {
   pathId: string | null = '';
   userId: number = -1;
   message: string = '';
+  noContractMessage: string = '';
   myContractAnswer: string = '';
 
   contract: ViewContract = {
@@ -61,8 +62,10 @@ export class ViewContractClientComponent {
             // console.log(err)
             // this.message = err.error.message;
             // window.alert([this.message]);
-            this.router.navigate(['/not-found']);
+            // this.router.navigate(['/not-found']);
+            
             if (err.error) {
+              this.noContractMessage = err.error.message;
               // this.content = JSON.parse(err.error).message;
             } else {
               // this.message = 'Error with status: ' + err.status;
@@ -90,30 +93,12 @@ export class ViewContractClientComponent {
       next: (data) => {
         // window.alert('You have answered successfully');
         // window.location.reload();
-        this.myContractAnswer = 'Yes';  
+        this.myContractAnswer = 'Yes'; 
+        window.location.reload(); 
       },
       error: (err) => {
         this.message = err.error.message;
         window.alert([this.message]);
-        if (err.error) {
-          // this.content = JSON.parse(err.error).message;
-        } else {
-          this.message = 'Error with status: ' + err.status;
-        }
-      },
-    });
-  }
-
-  approveContract(contractId: number): void {
-    this.contractService.approveContractNotary(contractId).subscribe({
-      next: (data) => {
-        window.location.reload();
-      },
-      error: (err) => {
-        this.message = err.error.message;
-        console.log(this.message);
-        // this.router.navigate(['/home']);
-        // window.alert([this.message]);
         if (err.error) {
           // this.content = JSON.parse(err.error).message;
         } else {

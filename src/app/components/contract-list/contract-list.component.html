@@ -22,8 +22,8 @@
             <tr *ngFor="let tempContract of contractList">
               <td>{{ tempContract.id}}</td>
               <td>{{ tempContract.text }}</td>
-              <td>{{ tempContract.dateCreated }}</td>
-              <td>{{ tempContract.dateApproved }}</td>
+              <td>{{ tempContract.dateCreated | date: 'medium' }}</td>
+              <td>{{ tempContract.dateApproved | date: 'medium' }}</td>
               <td>{{ tempContract.status }}</td>
               <td>
                 <button type="button" 

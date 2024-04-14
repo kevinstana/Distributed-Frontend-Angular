@@ -6,6 +6,8 @@ import { CreateContract } from "../_helpers/contract";
 
 const CONTRACTS_URL = '/api/contracts';
 const USER_CONTRACTS_URL = '/api/users';
+// const CONTRACTS_URL = 'http://localhost:9090/api/contracts';
+// const USER_CONTRACTS_URL = 'http://localhost:9090/api/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
