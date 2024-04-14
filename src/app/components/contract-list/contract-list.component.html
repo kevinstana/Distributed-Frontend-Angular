@@ -10,7 +10,7 @@
           <thead class="thead-dark">
             <tr class="tr1">
               <th>ID</th>
-              <th>Text</th>
+              <!-- <th *ngIf="notary">Text</th> -->
               <th>Date Created</th>
               <th>Date Confirmed</th>
               <th>Status</th>
@@ -21,7 +21,7 @@
           <tbody>
             <tr *ngFor="let tempContract of contractList">
               <td>{{ tempContract.id}}</td>
-              <td>{{ tempContract.text }}</td>
+              <!-- <td *ngIf="notary">{{ tempContract.text }}</td> -->
               <td>{{ tempContract.dateCreated | date: 'medium' }}</td>
               <td>{{ tempContract.dateApproved | date: 'medium' }}</td>
               <td>{{ tempContract.status }}</td>

@@ -23,9 +23,11 @@ export class ViewMyProfileComponent {
   message: string = '';
   id: number = -1;
   pathId: string | null = '';
+  activeUserId: number = -1;
 
   ngOnInit(): void {
     this.admin = this.storageService.isAdmin();
+    this.activeUserId = this.storageService.getUser().id;
 
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.pathId = params.get('id');

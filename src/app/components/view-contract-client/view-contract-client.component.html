@@ -42,41 +42,41 @@
 
                 <!-- member1 -->
                 <div class="form-group">
-                    <label for="member1">{{ this.member1[0] }}</label>
+                    <label for="member1">{{ this.contract.members[0].fullName }}</label>
                     <input class="form-control" 
                             type="text"
                             name="member1"
-                            [value]="this.member1[1]"
+                            [value]="this.contract.members[0].answer"
                             [readOnly]="true"/>
                 </div>
 
                 <!-- member2 -->
                 <div class="form-group">
-                    <label for="member2">{{ this.member2[0] }}</label>
+                    <label for="member2">{{ this.contract.members[1].fullName }}</label>
                     <input class="form-control" 
                             type="text"
                             name="member2"
-                            [value]="this.member2[1]"
+                            [value]="this.contract.members[1].answer"
                             [readOnly]="true"/>
                 </div>
 
                 <!-- member3 -->
                 <div class="form-group">
-                    <label for="member3">{{ this.member3[0] }}</label>
+                    <label for="member3">{{ this.contract.members[2].fullName }}</label>
                     <input class="form-control" 
                             type="text"
                             name="member3"
-                            [value]="this.member3[1]"
+                            [value]="this.contract.members[2].answer"
                             [readOnly]="true"/>
                 </div>
 
                 <!-- member4 -->
                 <div class="form-group">
-                    <label for="member4">{{ this.member4[0] }}</label>
+                    <label for="member4">{{ this.contract.members[3].fullName }}</label>
                     <input class="form-control" 
                             type="text"
                             name="member4"
-                            [value]="this.member4[1]"
+                            [value]="this.contract.members[3].answer"
                             [readOnly]="true"/>
                 </div>
 

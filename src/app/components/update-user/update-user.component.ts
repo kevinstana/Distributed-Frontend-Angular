@@ -26,12 +26,14 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
   updatedUserId?: number;
   pathId: string | null = '';
   id: number = -1;
+  activeUserId: number = -1;
 
   updateErrorMessage: string = '';
   message: string = '';
 
   ngOnInit(): void {
     this.admin = this.storageService.isAdmin();
+    this.activeUserId = this.storageService.getUser().id;
 
     if (this.admin) {
       this.activatedRoute.paramMap.subscribe((params: ParamMap) => {

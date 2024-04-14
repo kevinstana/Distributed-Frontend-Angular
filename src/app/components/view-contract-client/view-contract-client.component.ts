@@ -4,7 +4,6 @@ import { StorageService } from '../../_services/storage.service';
 import { ViewContract } from '../../_helpers/contract';
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-view-contract-client',
   templateUrl: './view-contract-client.component.html',
@@ -31,13 +30,13 @@ export class ViewContractClientComponent {
     dateCreated: '',
     dateApproved: '',
     status: '',
-    members: [],
+    members: [
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''}
+    ],
   };
-
-  member1: string[] = [];
-  member2: string[] = [];
-  member3: string[] = [];
-  member4: string[] = [];
 
   ngOnInit(): void {
     this.lawyer = this.storageService.isLawyer();
@@ -52,11 +51,7 @@ export class ViewContractClientComponent {
         this.contractService.viewContractClient(this.userId).subscribe({
           next: (data) => {
             this.contract = data;
-            this.member1 = this.contract.members[0].split(': ');
-            this.member2 = this.contract.members[1].split(': ');
-            this.member3 = this.contract.members[2].split(': ');
-            this.member4 = this.contract.members[3].split(': ');
-            this.myContractAnswer = this.contract.members[4];
+            this.myContractAnswer = this.contract.members[4].answer;
           },
           error: (err) => {
             // console.log(err)
@@ -91,14 +86,12 @@ export class ViewContractClientComponent {
   answerContract(): void {
     this.contractService.answerUserContract(this.userId).subscribe({
       next: (data) => {
-        // window.alert('You have answered successfully');
-        // window.location.reload();
         this.myContractAnswer = 'Yes'; 
         window.location.reload(); 
       },
       error: (err) => {
         this.message = err.error.message;
-        window.alert([this.message]);
+        // window.alert([this.message]);
         if (err.error) {
           // this.content = JSON.parse(err.error).message;
         } else {

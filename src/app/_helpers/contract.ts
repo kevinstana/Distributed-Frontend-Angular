@@ -1,4 +1,7 @@
 // used in contract list
+
+import { Member } from "./contract-members";
+
 // and to delete contract
 export interface Contract {
     id: number;
@@ -21,5 +24,5 @@ export interface ViewContract {
     dateCreated: string;
     dateApproved: string;
     status: string;
-    members: string[];
+    members: Member[];
 }

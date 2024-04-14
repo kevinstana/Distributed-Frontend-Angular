@@ -27,13 +27,13 @@ export class ViewContractNotaryComponent {
     dateCreated: '',
     dateApproved: '',
     status: '',
-    members: [],
+    members: [
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''},
+      {"answer": '', "fullName": ''}
+    ],
   };
-
-  member1: string[] = [];
-  member2: string[] = [];
-  member3: string[] = [];
-  member4: string[] = [];
 
   ngOnInit(): void {
     this.notary = this.storageService.isNotary();
@@ -47,10 +47,6 @@ export class ViewContractNotaryComponent {
         this.contractService.viewContractNotary(this.contractId).subscribe({
           next: (data) => {
             this.contract = data;
-            this.member1 = this.contract.members[0].split(': ');
-            this.member2 = this.contract.members[1].split(': ');
-            this.member3 = this.contract.members[2].split(': ');
-            this.member4 = this.contract.members[3].split(': ');
           },
           error: (err) => {
             // console.log(err)

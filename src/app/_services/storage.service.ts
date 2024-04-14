@@ -11,13 +11,13 @@ const USER_JWT = 'jwt'
 export class StorageService {
   constructor() {}
 
-  clean(): void {
-    localStorage.clear();
-  }
-
   public saveJwt(jwt: string): void {
     var splitToken = jwt.split(' ');
     localStorage.setItem(USER_JWT, splitToken[1]);
+  }
+
+  public getJwt(): string | null{
+    return localStorage.getItem(USER_JWT);
   }
 
   public saveUser(user: AuthorizedUser): void {
@@ -33,10 +33,6 @@ export class StorageService {
     return null;
   }
 
-  public getJwt(): string | null{
-    return localStorage.getItem(USER_JWT);
-  }
-
   public isLoggedIn(): boolean {
     let user = this.getUser();
     if (user) {
@@ -44,14 +40,6 @@ export class StorageService {
     }
     return false;
   }
-
-  private loginSource = new BehaviorSubject<boolean>(this.isLoggedIn());
-  currentLogin = this.loginSource.asObservable();
-  
-  changeLogin(login: boolean) {
-    this.loginSource.next(login);
-  }
-
 
   public isAdmin(): boolean {
     let user: AuthorizedUser = this.getUser();
@@ -95,6 +83,17 @@ export class StorageService {
     }
     
     return false;
+  }
+
+  private loginSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+  currentLogin = this.loginSource.asObservable();
+  
+  changeLogin(login: boolean) {
+    this.loginSource.next(login);
+  }
+
+  clean(): void {
+    localStorage.clear();
   }
 
 }

@@ -3,7 +3,10 @@
 
     <!-- Form -->
     <div class="container-fluid">
-        <h1>Profle of user with id: {{this.id}}</h1>
+        <h1 *ngIf="this.activeUserId != this.id; else sameUser">Profle of user with id: {{this.id}}</h1>
+        <ng-template #sameUser>
+            <h1>My Profile</h1>
+        </ng-template>
         <form name="form">
 
                 <!-- username -->
