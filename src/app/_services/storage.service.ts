@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthorizedUser } from '../_helpers/auth-user';
 
 const USER_KEY = 'authorized-user';
+const USER_JWT = 'jwt'
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,11 @@ export class StorageService {
 
   clean(): void {
     localStorage.clear();
+  }
+
+  public saveJwt(jwt: string): void {
+    var splitToken = jwt.split(' ');
+    localStorage.setItem(USER_JWT, splitToken[1]);
   }
 
   public saveUser(user: AuthorizedUser): void {
@@ -27,13 +33,8 @@ export class StorageService {
     return null;
   }
 
-  public getAccessToken(): string {
-    let user = this.getUser();
-    if (user) {
-      return user.accessToken;
-    }
-
-    return '';
+  public getJwt(): string | null{
+    return localStorage.getItem(USER_JWT);
   }
 
   public isLoggedIn(): boolean {
@@ -96,48 +97,4 @@ export class StorageService {
     return false;
   }
 
-  // some helpers for viewing user and contract info
-  public saveUpdatedUserId(userId: number): void {
-    localStorage.removeItem("updateUserId");
-    localStorage.setItem("updateUserId", userId.toString());
-  }
-
-  public removeUpdatedUserId(): void {
-    const id = localStorage.getItem("updateUserId");
-    if (id) {
-      localStorage.removeItem("updateUserId");
-    }
-  }
-
-  public getUpdatedUserId(): number {
-    const userId = localStorage.getItem("updateUserId");
-    if (userId) {
-      let id: number = +userId[0];
-      return id;
-    }
-
-    return -1;
-  }
-
-  public saveContractId(contractId: number): void {
-    localStorage.removeItem("contractId");
-    localStorage.setItem("contractId", contractId.toString());
-  }
-
-  public getContractId(): number {
-    const contractId = localStorage.getItem("contractId");
-    if (contractId) {
-      let id: number = +contractId[0];
-      return id;
-    }
-
-    return -1;
-  }
-
-  public removeContractId(): void {
-    const id = localStorage.getItem("contractId");
-    if (id) {
-      localStorage.removeItem("contractId");
-    }
-  }
 }

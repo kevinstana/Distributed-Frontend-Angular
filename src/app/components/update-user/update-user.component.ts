@@ -117,7 +117,6 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
             this.form.reset();
             this.router.navigate(['/login']);
           } else {
-            this.storageService.removeUpdatedUserId();
             this.router.navigate(['/users']);
           }
         },

@@ -6,7 +6,7 @@ const AUTH_API = '/api/';
 // const AUTH_API = 'http://localhost:9090/api/';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
   
 @Injectable({
@@ -16,15 +16,8 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string | null | undefined, 
-        password: string | null | undefined): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'login',
-      {
-        username,
-        password,
-      },
-      httpOptions
-    );
+        password: string | null | undefined): Observable<any> {      
+    return this.http.post(AUTH_API + 'login', {username, password}, {observe: 'response'});
   }
 
   logout(): Observable<any> {

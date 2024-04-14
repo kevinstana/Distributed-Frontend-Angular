@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.login(username, password).subscribe({
       next: (data) => {
-        this.storageService.saveUser(data);
+        this.storageService.saveJwt(data.headers.get('authorization'));
+        this.storageService.saveUser(data.body);
         this.storageService.changeLogin(true);
         this.router.navigate(['']);
       },
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.storageService.currentLogin.subscribe(login => this.loggedIn = login).unsubscribe();
-    this.form.reset();
+    // this.form.reset();
   }
 
 }
