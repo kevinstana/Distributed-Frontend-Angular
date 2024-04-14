@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.storageService.currentLogin.subscribe(login => this.loggedIn = login).unsubscribe();
+    this.form.reset();
   }
 
 }
