@@ -14,6 +14,10 @@ export class ContractListComponent {
   admin: boolean = false;
   notary: boolean = false;
   message: string = '';
+  clickedDelete: boolean = false;
+  clickeForcedDelete: boolean = false;
+  tmpIndex: number = -1;
+  tmpId: number = -1;
 
   constructor(
     private contractService: ContractService,
@@ -34,11 +38,6 @@ export class ContractListComponent {
         },
         error: (err) => {
           console.log(err);
-          if (err.error) {
-            // this.content = JSON.parse(err.error).message;
-          } else {
-            this.message = 'Error with status: ' + err.status;
-          }
         },
       });
     }
@@ -48,7 +47,7 @@ export class ContractListComponent {
     this.router.navigate(['/contract', contractId]);
   }
 
-  deleteContract(contract: Contract) {
+  deleteContractt(contract: Contract) {
     if(confirm("Delete contract with id " + contract.id + "?")) {
       this.contractService.deleteContract(contract.id).subscribe((data) => {
       });
@@ -60,16 +59,82 @@ export class ContractListComponent {
     }
   }
 
-  forceDeleteContract(contract: Contract) {
-    if(confirm("Delete contract with id " + contract.id + "?")) {
-      this.contractService.forceDeleteContract(contract.id).subscribe((data) => {
-    
+  deleteContract(answer?: boolean | null): void {
+    this.message = '';
+
+    if (answer) {
+      this.contractService.deleteContract(this.tmpId).subscribe({
+        next: (data) => {
+          this.contractList?.splice(this.tmpIndex, 1);
+          this.tmpId = -1;
+          this.tmpIndex = -1;
+        },
+        error: (err) => {
+          if (this.message.length == 0) {
+            this.message = err.error.message;
+            setTimeout(() => {
+              this.message = '';
+          }, 3000);
+          }
+          if (err.error) {
+          } else {
+            this.message = 'Error with status: ' + err.status;
+          }
+        },
       });
-      const index = this.contractList!.indexOf(contract, 0);
-      if (index > -1) {
-        this.contractList!.splice(index, 1);
-      }
+
     }
+  }
+
+  forceDeleteContract(answer?: boolean | null): void {
+    this.message = '';
+
+    if (answer) {
+      this.contractService.forceDeleteContract(this.tmpId).subscribe({
+        next: (data) => {
+          this.contractList?.splice(this.tmpIndex, 1);
+          this.tmpId = -1;
+          this.tmpIndex = -1;
+        },
+        error: (err) => {
+          if (this.message.length == 0) {
+            this.message = err.error.message;
+            setTimeout(() => {
+              this.message = '';
+          }, 3000);
+          }
+          if (err.error) {
+          } else {
+            this.message = 'Error with status: ' + err.status;
+          }
+        },
+      });
+
+    }
+  }
+
+  onClickDelete(contractId: number, index: number) {
+    this.clickedDelete = true;
+    this.message = `Delete contract with id: ${contractId}?`
+
+    this.tmpIndex = index;
+    this.tmpId = contractId;
+  }
+
+  onClickForceDelete(contractId: number, index: number) {
+    this.clickeForcedDelete = true;
+    this.message = `Force Delete contract with id: ${contractId}?`
+
+    this.tmpIndex = index;
+    this.tmpId = contractId;
+  }
+
+  ngOnDestroy(): void {
+    this.clickedDelete = false;
+    this.message = '';
+
+    this.tmpIndex = -1;
+    this.tmpId = -1;
   }
 
 }

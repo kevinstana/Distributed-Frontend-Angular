@@ -126,7 +126,7 @@
     <ng-template #noContract>
             <div style="left: 50%; transform: translate(-50%, -50%); position: absolute; margin-top: 30vh;">
                 <h2 style="color: white;">{{ this.noContractMessage }}</h2>
-                <button
+                <button *ngIf="lawyer"
                     style="margin-top: 20px;"
                     type="button"
                     class="btn btn-primary btn-lg btn-block"

@@ -49,15 +49,8 @@ export class ViewContractNotaryComponent {
             this.contract = data;
           },
           error: (err) => {
-            // console.log(err)
-            // this.message = err.error.message;
-            // window.alert([this.message]);
+            console.log(err)
             this.router.navigate(['/not-found']);
-            if (err.error) {
-              // this.content = JSON.parse(err.error).message;
-            } else {
-              // this.message = 'Error with status: ' + err.status;
-            }
           },
         });
       } else {

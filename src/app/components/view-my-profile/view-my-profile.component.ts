@@ -40,14 +40,11 @@ export class ViewMyProfileComponent {
           this.userProfile.role.join(', ');
         },
         error: (err) => {
-          this.message = err.error.message;
-          // window.alert([this.message]);
-          this.router.navigate(['/not-found']);
+          console.log(err);
           if (err.error) {
-            // this.content = JSON.parse(err.error).message;
-          } else {
-            // this.message = 'Error with status: ' + err.status;
+            console.log(err.error.message);
           }
+          this.router.navigate(['/not-found']);
         },
       });
     } else {
