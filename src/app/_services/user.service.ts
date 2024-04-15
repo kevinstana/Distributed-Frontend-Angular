@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, CreateUser, UpdateUser, ViewUser } from '../_helpers/app-user';
 import { Contract, ViewContract } from '../_helpers/contract';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environment/environment';
+import { environment } from 'src/environments/environment';
 
 // const API_URL = '/api/users';
 // const API_URL = 'http://localhost:9090/api/users';

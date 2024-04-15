@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Contract, ViewContract } from "../_helpers/contract";
 import { CreateContract } from "../_helpers/contract";
-import { environment } from "src/environment/environment";
+import { environment } from "src/environments/environment";
 
 
 // const CONTRACTS_URL = '/api/contracts';
