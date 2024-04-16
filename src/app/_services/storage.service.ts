@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { AuthorizedUser } from '../_helpers/auth-user';
 
-const USER_KEY = 'auth-user';
+const USER_KEY = 'authorized-user';
+const USER_JWT = 'jwt'
 
 @Injectable({
   providedIn: 'root'
@@ -8,48 +11,40 @@ const USER_KEY = 'auth-user';
 export class StorageService {
   constructor() {}
 
-  clean(): void {
-    localStorage.clear();
+  public saveJwt(jwt: string): void {
+    var splitToken = jwt.split(' ');
+    localStorage.setItem(USER_JWT, splitToken[1]);
   }
 
-  // User handling
-  public saveUser(user: any): void {
-    localStorage.removeItem(USER_KEY);
+  public getJwt(): string | null{
+    return localStorage.getItem(USER_JWT);
+  }
+
+  public saveUser(user: AuthorizedUser): void {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
+    let user = localStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
 
-    return {};
+    return null;
   }
 
-  // jwt
-  public getBearerToken(): any {
-    const user = localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.stringify(user[4]).toString;
-    }
-  }
-
-  // roles and loggin check
   public isLoggedIn(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user = this.getUser();
     if (user) {
       return true;
     }
-
     return false;
   }
 
   public isAdmin(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('ADMIN')) {
+      if (user.roles.includes('ADMIN')) {
         return true;
       }
     }
@@ -58,10 +53,9 @@ export class StorageService {
   }
 
   public isNotary(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('NOTARY')) {
+      if (user.roles.includes('NOTARY')) {
         return true;
       }
     }
@@ -70,10 +64,9 @@ export class StorageService {
   }
 
   public isLawyer(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('LAWYER')) {
+      if (user.roles.includes('LAWYER')) {
         return true;
       }
     }
@@ -82,10 +75,9 @@ export class StorageService {
   }
 
   public isClient(): boolean {
-    const user = localStorage.getItem(USER_KEY);
+    let user: AuthorizedUser = this.getUser();
     if (user) {
-      let userJson = JSON.parse(user);
-      if (userJson.roles.includes('CLIENT')) {
+      if (user.roles.includes('CLIENT')) {
         return true;
       }
     }
@@ -93,48 +85,15 @@ export class StorageService {
     return false;
   }
 
-  // some helpers for viewing user and contract info
-  public saveUpdatedUserId(userId: number): void {
-    localStorage.removeItem("updateUserId");
-    localStorage.setItem("updateUserId", userId.toString());
+  private loginSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+  currentLogin = this.loginSource.asObservable();
+  
+  changeLogin(login: boolean) {
+    this.loginSource.next(login);
   }
 
-  public removeUpdatedUserId(): void {
-    const id = localStorage.getItem("updateUserId");
-    if (id) {
-      localStorage.removeItem("updateUserId");
-    }
+  clean(): void {
+    localStorage.clear();
   }
 
-  public getUpdatedUserId(): number {
-    const userId = localStorage.getItem("updateUserId");
-    if (userId) {
-      let id: number = +userId[0];
-      return id;
-    }
-
-    return -1;
-  }
-
-  public saveContractId(contractId: number): void {
-    localStorage.removeItem("contractId");
-    localStorage.setItem("contractId", contractId.toString());
-  }
-
-  public getContractId(): number {
-    const contractId = localStorage.getItem("contractId");
-    if (contractId) {
-      let id: number = +contractId[0];
-      return id;
-    }
-
-    return -1;
-  }
-
-  public removeContractId(): void {
-    const id = localStorage.getItem("contractId");
-    if (id) {
-      localStorage.removeItem("contractId");
-    }
-  }
 }

@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="container-fluid">
+    <h1>Contract List</h1>
+    <div > <!--*ngif="loggedIn"-->
+      <div *ngIf="contractList!.length > 0 else elseBlock">
+
+        <div *ngIf="clickedDelete">
+          <div *ngIf="this.message.includes('id')"
+              class="alert alert-danger" 
+              style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="aler alert-danger">
+            {{ this. message }}
+          </div>
+          <div style="display: flex; justify-content:space-around; align-items: center;">
+            <input class="btn btn-danger" type="button" value="Yes" style="margin-right: 5px;" (click)="deleteContract(true)">
+            <input class="btn btn-warning" type="button" value="No" (click)="deleteContract()">
+          </div>
+        </div>
+        </div>
+
+        <div *ngIf="clickeForcedDelete">
+          <div *ngIf="this.message.includes('id')"
+              class="alert alert-danger" 
+              style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="aler alert-danger">
+            {{ this. message }}
+          </div>
+          <div style="display: flex; justify-content:space-around; align-items: center;">
+            <input class="btn btn-danger" type="button" value="Yes" style="margin-right: 5px;" (click)="forceDeleteContract(true)">
+            <input class="btn btn-warning" type="button" value="No" (click)="forceDeleteContract()">
+          </div>
+        </div>
+        </div>
+
+        <!-- maybe add table-responsive -->
+        <table class="table table-dark table-striped table-bordered table-hover ">
+          
+          <thead class="thead-dark">
+            <tr class="tr1">
+              <th>ID</th>
+              <!-- <th *ngIf="notary">Text</th> -->
+              <th>Date Created</th>
+              <th>Date Approved</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let tempContract of contractList; let i=index">
+              <td>{{ tempContract.id}}</td>
+              <!-- <td *ngIf="notary">{{ tempContract.text }}</td> -->
+              <td>{{ tempContract.dateCreated | date: 'medium' }}</td>
+              <td>{{ tempContract.dateApproved | date: 'medium' }}</td>
+              <td>{{ tempContract.status }}</td>
+              <td>
+                <button type="button" 
+                        class="btn btn-primary"
+                        *ngIf="notary"
+                        (click)="viewContractNotary(tempContract.id)"
+                        >View
+                </button>
+
+                <button type="button" 
+                        class="btn btn-danger" 
+                        (click)="onClickDelete(tempContract.id, i)"
+                        *ngIf="admin && tempContract.status.includes('APPROVED')">Delete</button>
+
+                <button type="button" 
+                        class="btn btn-danger" 
+                        (click)="onClickForceDelete(tempContract.id, i)"
+                        *ngIf="admin && !tempContract.status.includes('APPROVED')">Force Delete</button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- no contracts message -->
+      <ng-template #elseBlock>
+        <div class="no-contracts">
+          There are no contracts
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

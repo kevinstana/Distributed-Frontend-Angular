@@ -1,0 +1,106 @@
+<div class="container">
+
+
+    <!-- Form -->
+    <div class="container-fluid">
+        <h1 *ngIf="this.activeUserId != this.id; else sameUser">Profle of user with id: {{this.id}}</h1>
+        <ng-template #sameUser>
+            <h1>My Profile</h1>
+        </ng-template>
+        <form name="form">
+
+                <!-- username -->
+                <div class="form-group overflow-auto">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text"
+                        name="username"
+                        class="form-control" readonly
+                        value="{{this.userProfile?.username}}"
+                        [readOnly]="true"/>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="text"
+                        name="email"
+                        class="form-control"
+                        value="{{this.userProfile?.email}}"
+                        [readOnly]="true" />
+                </div>
+
+                <!-- roles -->
+                <div class="form-group">
+                    <label for="Roles">Roles</label>
+                    <input 
+                        type="text"
+                        name="roles"
+                        class="form-control"
+                        value="{{this.userProfile?.role?.join(', ')}}"
+                        [readOnly]="true" />
+                </div>
+
+                <!-- firstName -->
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input 
+                        type="text"
+                        name="firstName"
+                        class="form-control"
+                        value="{{this.userProfile?.firstName}}"
+                        [readOnly]="true" />
+                </div>
+
+                <!-- lastName -->
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input 
+                        type="text"
+                        name="lastName"
+                        class="form-control"
+                        value="{{this.userProfile?.lastName}}"
+                        [readOnly]="true" />
+                </div>
+
+                <!-- afm -->
+                <div class="form-group">
+                    <label for="afm">AFM</label>
+                    <input 
+                        type="text"
+                        name="afm"
+                        class="form-control"
+                        value="{{this.userProfile?.afm}}"
+                        [readOnly]="true" />
+                </div>
+
+                <!-- amka -->
+                <div class="form-group">
+                    <label for="amka">AMKA</label>
+                    <input 
+                        type="text"
+                        name="amka"
+                        class="form-control"
+                        value="{{this.userProfile?.amka}}"
+                        [readOnly]="true" />
+                </div>
+                
+                <button
+                    *ngIf="this.admin"
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    [routerLink]="['/update-user', this.id]"
+                    >Update
+                </button>
+
+                <button 
+                    type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    [routerLink]="''"
+                    >Back
+                </button>
+
+        </form>
+    </div>
+</div>

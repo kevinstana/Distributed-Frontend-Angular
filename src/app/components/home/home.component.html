@@ -1,0 +1,33 @@
+<div class="container">
+
+  <div class="container container-fluid">
+    <div class="button-wrapper">
+
+      <!-- User List -->
+      <button *ngIf="admin" class="btn btn-primary btn-lg btn-block" [routerLink]="'/users'">User List</button>
+
+      <!-- Contract List -->
+      <button *ngIf="admin || notary" class="btn btn-primary btn-lg btn-block" [routerLink]="'/contracts'">Contract
+        List</button>
+
+      <!-- Create Contract -->
+      <button *ngIf="lawyer" class="btn btn-primary btn-lg btn-block" [routerLink]="'/create-contract'">Create
+        Contract</button>
+
+      <!-- View Contract -->
+      <button *ngIf="lawyer || client" class="btn btn-primary btn-lg btn-block" [routerLink]="'/my-contract/' + this.userId">View
+        Contract</button>
+
+      <!-- Create User -->
+      <button *ngIf="admin" class="btn btn-primary btn-lg btn-block" [routerLink]="'/create-user'">Create User</button>
+
+      <!-- View Profile -->
+      <button class="btn btn-primary btn-lg btn-block" [routerLink]="'/my-profile/' + this.userId">View Profile</button>
+    
+    </div>
+  </div>
+
+  <app-identification *ngIf="loggedIn"></app-identification>
+  
+</div>
+

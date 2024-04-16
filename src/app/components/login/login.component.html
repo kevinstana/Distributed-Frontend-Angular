@@ -1,0 +1,35 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <!-- Form -->
+  <form 
+    name="form"
+    [formGroup]="form"
+    (ngSubmit)="$event.preventDefault(); submitForm()">
+    
+        <!-- Username -->
+        <input 
+            type="text" 
+            name="username" 
+            placeholder="Username"
+            formControlName="username"
+            autocomplete="on"
+        />
+
+        <input 
+            type="password" 
+            name="password" 
+            placeholder="Password"
+            formControlName="password"
+            autocomplete="on"
+        />
+
+      <input type="submit" value="Login">
+
+      <div *ngIf="errorMessage" class="form-group">
+        <small class="text-danger"
+            >Login failed: {{ errorMessage }}
+        </small>
+      </div>
+  </form>
+</div>
