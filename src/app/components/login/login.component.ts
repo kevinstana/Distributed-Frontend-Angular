@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.storageService.saveJwt(data.headers.get('authorization'));
         this.storageService.saveUser(data.body);
         this.storageService.changeLogin(true);
+        this.form.reset();
         this.router.navigate(['']);
       },
       error: (err) => {
