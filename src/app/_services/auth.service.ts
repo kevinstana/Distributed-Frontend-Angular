@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environment/environment';
+import { environment } from 'src/environments/environment';
 
-// const AUTH_API = '/api/';
-// const AUTH_API = 'http://localhost:9090/api/';
 const AUTH_API = environment.backendUrl;
 
 const httpOptions = {

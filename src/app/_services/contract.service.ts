@@ -3,12 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Contract, ViewContract } from "../_helpers/contract";
 import { CreateContract } from "../_helpers/contract";
-import { environment } from "src/environment/environment";
+import { environment } from "src/environments/environment";
 
-// const CONTRACTS_URL = '/api/contracts';
-// const USER_CONTRACTS_URL = '/api/users';
-// const CONTRACTS_URL = 'http://localhost:9090/api/contracts';
-// const USER_CONTRACTS_URL = 'http://localhost:9090/api/users';
 const CONTRACTS_URL = environment.backendUrl + 'contracts';
 const USER_CONTRACTS_URL = environment.backendUrl + 'users';
 
