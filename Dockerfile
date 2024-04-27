@@ -1,10 +1,9 @@
 FROM node:16.20.2-alpine3.18 as build-stage
 WORKDIR /app
 RUN npm install -g @angular/cli@15.0.5
-# COPY package*.json ./
-# RUN npm install
-COPY . .
+COPY package*.json ./
 RUN npm install
+COPY . .
 RUN ng build --configuration=production
 
 FROM nginx:stable-alpine3.19-perl as production-stage
